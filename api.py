@@ -2,10 +2,10 @@ import os
 import re
 import pickle
 import pathlib
-import urllib.request
 import zipfile
 from typing import List, Optional
 
+import gdown
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,9 +28,9 @@ def download_models_from_drive():
         filepath = MODELS_DIR / filename
         if not filepath.exists():
             print(f"[Dual-AI] Downloading {filename}...")
-            url = f"https://drive.google.com/uc?export=download&id={file_id}"
+            url = f"https://drive.google.com/uc?id={file_id}"
             try:
-                urllib.request.urlretrieve(url, filepath)
+                gdown.download(url, str(filepath), quiet=False)
                 print(f"[Dual-AI] ✓ Downloaded {filename}")
             except Exception as e:
                 print(f"[Dual-AI] ✗ Failed to download {filename}: {e}")
@@ -52,9 +52,12 @@ def extract_models():
         pkl_path = MODELS_DIR / pkl_name
         if zip_path.exists() and not pkl_path.exists():
             print(f"[Dual-AI] Extracting {zip_name}...")
-            with zipfile.ZipFile(zip_path, "r") as z:
-                z.extractall(MODELS_DIR)
-            print(f"[Dual-AI] ✓ Extracted {pkl_name}")
+            try:
+                with zipfile.ZipFile(zip_path, "r") as z:
+                    z.extractall(MODELS_DIR)
+                print(f"[Dual-AI] ✓ Extracted {pkl_name}")
+            except Exception as e:
+                print(f"[Dual-AI] ✗ Failed to extract {zip_name}: {e}")
 
 # Run downloads and extraction at startup
 download_models_from_drive()
