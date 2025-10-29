@@ -161,6 +161,11 @@ def _startup() -> None:
     load_url_model()
     print("[Dual-AI] API ready ✓")
 
+# -------------------- CORS Preflight Handler --------------------
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return {}
+
 # -------------------- Endpoints --------------------
 @app.get("/")
 def root():
@@ -216,24 +221,3 @@ def predict_dual(req: DualRequest):
 @app.post("/predict")
 def predict_extension(req: EmailRequest):
     text = (req.text or "").strip()
-    if not text:
-        raise HTTPException(status_code=400, detail="text is required")
-
-    if ModelRegistry.email_model is not None and ModelRegistry.email_vectorizer is not None:
-        res = analyze_email_with_model(text)
-        label = 1 if res["prediction"] == "phishing" else 0
-        phishing_prob = float(res["probabilities"].get("phishing", 0.0))
-        return {"label": label, "phishing_probability": phishing_prob}
-
-    url_pattern = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
-    urls = re.findall(url_pattern, text)
-    if ModelRegistry.url_model is not None and urls:
-        probs = []
-        for u in urls:
-            res = analyze_url_with_model(u)
-            probs.append(float(res["probabilities"]["phishing"]))
-        phishing_prob = max(probs) if probs else 0.0
-        label = 1 if phishing_prob >= 0.5 else 0
-        return {"label": label, "phishing_probability": phishing_prob}
-
-    return {"label": 0, "phishing_probability": 0.0}
