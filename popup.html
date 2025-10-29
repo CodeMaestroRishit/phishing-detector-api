@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Phishing Detector</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 12px; width: 280px; }
+      h1 { font-size: 16px; margin: 0 0 8px; }
+      button { padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; background: #111; color: #fff; cursor: pointer; }
+      button:disabled { opacity: 0.6; cursor: default; }
+      .result { margin-top: 10px; font-size: 13px; }
+      .ok { color: #0a8a2a; }
+      .warn { color: #a10f0f; }
+      .muted { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>Phishing Detector</h1>
+    <button id="analyze">Analyze selected text</button>
+    <div class="result muted" id="status">Select text on the page, then click Analyze.</div>
+    <script src="popup.js"></script>
+  </body>
+</html>
