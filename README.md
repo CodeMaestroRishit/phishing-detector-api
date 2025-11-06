@@ -1,4 +1,4 @@
-# 🛡️ Dual AI Phishing Detector  
+# 🛡️ Phishing Detector NEO Edition
 
 > **A production-grade phishing detection system** combining dual machine learning models for **email text** and **URL analysis** with real-time browser integration.
 
