@@ -3,13 +3,14 @@
 > **A production-grade phishing detection system** combining dual machine learning models for **email text** and **URL analysis** with real-time browser integration.
 
 <p align="center">
-  <img src="https://drive.google.com/file/d/169UPOpMGtjLLRwoxdW-5H72gOsOwHdV7/view?usp=sharing" alt="Streamlit Dashboard Preview" width="800">
+  <img src="https://drive.google.com/uc?export=view&id=169UPOpMGtjLLRwoxdW-5H72gOsOwHdV7" alt="Streamlit Dashboard Preview" width="800">
   <br>
-  <img src="https://drive.google.com/file/d/1Z8YRd3aJyNYwbabRtClWMmGOXRV_YMNo/view?usp=sharing" alt="Safe Email Detected Through Extension" width="800">
+  <img src="https://drive.google.com/uc?export=view&id=1Z8YRd3aJyNYwbabRtClWMmGOXRV_YMNo" alt="Safe Email Detected Through Extension" width="800">
   <br>
-  <img src="https://drive.google.com/file/d/12WZ-8h6KLJ7on7izMesx4GALXX8FkeXS/view?usp=drive_link" alt="Unsafe Email Detected Through Extension" width="800">
-  <br>
+  <img src="https://drive.google.com/uc?export=view&id=12WZ-8h6KLJ7on7izMesx4GALXX8FkeXS" alt="Unsafe Email Detected Through Extension" width="800">
 </p>
+
+
 
 <p align="center">
   <a href="https://github.com/CodeMaestroRishit/phishing-detector-api">
