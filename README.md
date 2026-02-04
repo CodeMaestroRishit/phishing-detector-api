@@ -1,48 +1,50 @@
-# 🛡️ Phishing Detector NEO Edition
+# SecureCall AI Detector 🛡️
+> *Winner-Ready Hackathon Project | Hybrid AI + Physics Voice Fraud Detection*
 
-> **A production-grade phishing detection system** combining dual machine learning models for **email text** and **URL analysis** with real-time browser integration.
+**SecureCall** is an advanced voice fraud detection API designed to catch deepfakes that traditional models miss. It uniquely combines deep learning with acoustic physics to distinguish between high-quality AI cloning and real human vocal production.
 
-<p align="center">
-  <img src="https://drive.google.com/uc?export=view&id=169UPOpMGtjLLRwoxdW-5H72gOsOwHdV7" alt="Streamlit Dashboard Preview" width="800">
-  <br>
-  <img src="https://drive.google.com/uc?export=view&id=1Z8YRd3aJyNYwbabRtClWMmGOXRV_YMNo" alt="Safe Email Detected Through Extension" width="800">
-  <br>
-  <img src="https://drive.google.com/uc?export=view&id=12WZ-8h6KLJ7on7izMesx4GALXX8FkeXS" alt="Unsafe Email Detected Through Extension" width="800">
-</p>
+## 🚀 Key Features (The "Wow" Factor)
 
+### 1. Hybrid Detection Engine
+Most detectors rely solely on AI models (which can be fooled by new TTS). We use a **Triple-Check System**:
+-   **Deep Learning**: Multilingual Wav2Vec2 (XLS-R) model.
+-   **Robotic Smoothness**: Heuristics to detect unnatural consistency in AI speech.
+-   **Physics Validator (pYIN)**: Analysis of "vocal jitter". Real vocal cords have natural instability (2-8Hz); AI is mathematically perfection. **We catch the perfection.**
 
+### 2. Multilingual Support 🇮🇳
+Targeted for Indian contexts using `XLS-R` architecture. Tested on Hindi, English, and regional accents.
 
-<p align="center">
-  <a href="https://github.com/CodeMaestroRishit/phishing-detector-api">
-    <img src="https://img.shields.io/github/stars/yourusername/dual-ai-phishing-detector?style=for-the-badge&logo=github&color=FFD700" alt="GitHub stars">
-  </a>
-  
-  <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python" alt="Python Version">
-  </a>
-  <a href="https://fastapi.tiangolo.com/">
-    <img src="https://img.shields.io/badge/FastAPI-0.104+-green?style=for-the-badge&logo=fastapi" alt="FastAPI">
-  </a>
-  <a href="https://streamlit.io/">
-    <img src="https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit" alt="Streamlit">
-  </a>
-</p>
+### 3. "Goldilocks" Scoring
+Our system allows:
+-   **Perfect Detection**: Detects AI even if it sounds "human" to the ear (via smoothness).
+-   **Zero False Positives**: "Rescues" real human voices (even with noise) if they have valid vocal physics.
 
-<p align="center">
-  <b>Accuracy:</b> 99.35% (Email) | 97% (URLs) • <b>Dataset:</b> 400K+ Samples • <b>Latency:</b> &lt;100 ms • <b>Version:</b> 1.0.0
-</p>
+## 🛠️ Tech Stack
+-   **FastAPI**: High-performance backend.
+-   **Transformers**: `Gustking/wav2vec2-large-xlsr-deepfake-audio-classification`.
+-   **Librosa & PyAV**: Advanced signal signal processing & ffmpeg-free decoding.
+-   **OpenAI Whisper**: Automatic transcription & fraud keyword detection.
 
----
+## 🎤 Usage
 
-## 🔍 Quick Access  
+### 1. Start Server
+```bash
+./venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
 
-| Section | Link |
-|----------|------|
-| 🚀 [Quick Start](https://phishing-detector-website-mh8a5fdxzkjwd7en5qw9an.streamlit.app/) | Setup & Run the System |
-| 🧠 [Model Details](https://drive.google.com/file/d/1e37dR6njzh4bZppE1-YyKYam8-NKp98r/view?usp=sharing) | Learn how the AI Models Work |
-| 🌐 [API Endpoints](https://drive.google.com/file/d/1lfmLKulmguN7H8vegVB3h0xijGENum6Z/view?usp=drive_link) | REST API Docs |
-| 📊 [Dashboard](https://phishing-detector-website-mh8a5fdxzkjwd7en5qw9an.streamlit.app/) | Real-Time Visualization |
-| 🧩 [Architecture](#-architecture) | System Overview |
-| 📈 [Performance](https://phishing-detector-website-mh8a5fdxzkjwd7en5qw9an.streamlit.app/) | Accuracy Metrics |
+### 2. Test
+-   **Web Interface**: Open `http://localhost:8000` to record your voice.
+-   **API**: Run `python test_api.py` for detailed diagnostics.
 
----
+## 📊 Diagnostics Example
+The API explains *why* it made a decision:
+```json
+{
+  "classification": "AI",
+  "confidence": 0.86,
+  "heuristics": {
+    "pitch_jitter": 11.6, // Too high for human, rejected
+    "smoothness": 0.98    // Too smooth, robotic
+  }
+}
+```
