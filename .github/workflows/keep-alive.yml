@@ -12,8 +12,9 @@ jobs:
       - name: Ping API
         run: |
           curl -X GET https://phishing-detector-api-1.onrender.com/ \
-          --max-time 40
+          --max-time 45 \
+          --connect-timeout 10 \
+          -f || true
       
-      - name: Log success
-        if: success()
-        run: echo "✅ Pinged at $(date)"
+      - name: Log attempt
+        run: echo "✅ Ping attempt at $(date)"
