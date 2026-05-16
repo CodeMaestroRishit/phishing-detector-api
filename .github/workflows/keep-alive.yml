@@ -12,7 +12,7 @@ jobs:
       - name: Ping API
         run: |
           curl -X GET https://phishing-detector-api-1.onrender.com/ \
-          --max-time 10
+          --max-time 40
       
       - name: Log success
         if: success()
