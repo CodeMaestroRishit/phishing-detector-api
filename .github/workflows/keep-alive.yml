@@ -1,0 +1,19 @@
+name: Keep API Awake
+
+on:
+  schedule:
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API
+        run: |
+          curl -X GET https://phishing-detector-api-1.onrender.com/ \
+          --max-time 10
+      
+      - name: Log success
+        if: success()
+        run: echo "✅ Pinged at $(date)"
